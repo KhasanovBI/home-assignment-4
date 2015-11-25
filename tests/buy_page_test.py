@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import unittest
 import os
+import unittest
+
 from selenium.webdriver import DesiredCapabilities, Remote
 
 from page_objects.buy_page_object import BuyPage
 
 
 class BuyPageTest(unittest.TestCase):
-    # PASSWORD = os.environ['TTHA2PASSWORD']
-
     def setUp(self):
         browser = os.environ.get('TTHA2BROWSER', 'CHROME')
 

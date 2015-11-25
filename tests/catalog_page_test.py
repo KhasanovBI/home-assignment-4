@@ -1,6 +1,7 @@
 # coding: utf-8
 import os
 import unittest
+
 from selenium.webdriver import DesiredCapabilities, Remote
 
 from page_objects.catalog_page_object import CatalogPage

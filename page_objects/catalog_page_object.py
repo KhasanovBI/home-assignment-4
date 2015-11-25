@@ -1,5 +1,6 @@
 # coding=utf-8
 from selenium.webdriver import ActionChains
+
 from page_objects.base_page_object import Page, Component
 
 

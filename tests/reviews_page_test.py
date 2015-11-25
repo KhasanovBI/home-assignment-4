@@ -1,9 +1,9 @@
 # coding: utf-8
-import os
 import unittest
 from urlparse import urlparse
 
 from selenium.webdriver import DesiredCapabilities, Remote
+
 from auth_settings import *
 from page_objects.reviews_page_object import ReviewsPage
 
@@ -33,4 +33,3 @@ class AddReviewButtonCheck(unittest.TestCase):
         login_form.submit()
         self.reviews_page.wait_another_page_loading()
         self.assertEquals(urlparse(self.reviews_page.get_current_url()).netloc, 'e.mail.ru')
-

@@ -1,5 +1,5 @@
-from locators import BuyPageLocators
 from element import *
+from locators import BuyPageLocators
 from page_objects.base_page_object import Page
 
 
