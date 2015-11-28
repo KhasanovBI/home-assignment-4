@@ -39,14 +39,14 @@ class LoginForm(Component):
     LOGIN_BUTTON = '//*[@class="x-ph__button__input"]'
 
     def wait_popup(self):
-        WebDriverWait(self.driver, 5).until(
-            lambda driver: EC.visibility_of_element_located(driver.find_element_by_xpath(self.LOGIN_BUTTON))
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: driver.find_element_by_xpath(self.LOGIN_BUTTON)
         )
-        WebDriverWait(self.driver, 5).until(
-            lambda driver: EC.visibility_of_element_located(driver.find_element_by_xpath(self.USERNAME_FIELD))
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: driver.find_element_by_xpath(self.USERNAME_FIELD)
         )
-        WebDriverWait(self.driver, 5).until(
-            lambda driver: EC.visibility_of_element_located(driver.find_element_by_xpath(self.PASSWORD_FIELD))
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: driver.find_element_by_xpath(self.PASSWORD_FIELD)
         )
 
     def set_login(self, login):

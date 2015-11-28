@@ -1,6 +1,5 @@
-from selenium.webdriver.support.wait import WebDriverWait
 from element import *
-from locators import StarLocator, ReviewPageLocators
+from locators import ReviewPageLocators
 from page_objects.base_page_object import Page
 
 
@@ -13,20 +12,17 @@ class ReviewPage(Page):
         self.BMW_list_item = ClickableElement(ReviewPageLocators.BMW_LIST_ITEM, self)
         self.marka_box = ClickableElement(ReviewPageLocators.MARKA_BOX, self)
         self.probeg_input = ProbegInput(ReviewPageLocators.PROBEG_INPUT, self)
-        self.problems_input = ReviewPageTextarea(ReviewPageLocators.PROBLEMS_INPUT,
-                                                 ReviewPageLocators.PROBLEMS_INPUT_WRAP, self)
+        self.problems_input = ReviewPageTextarea(ReviewPageLocators.PROBLEMS_INPUT, ReviewPageLocators.PROBLEMS_INPUT_WRAP, self)
         self.submit_btn = ClickableElement(ReviewPageLocators.SUBMIT_BTN, self)
-        self.advant_input = ReviewPageTextarea(ReviewPageLocators.ADVANT_INPUT, ReviewPageLocators.ADVANT_INPUT_WRAP,
-                                               self)
-        self.common_input = ReviewPageTextarea(ReviewPageLocators.COMMON_INPUT, ReviewPageLocators.COMMON_INPUT_WRAP,
-                                               self)
+        self.advant_input = ReviewPageTextarea(ReviewPageLocators.ADVANT_INPUT, ReviewPageLocators.ADVANT_INPUT_WRAP, self)
+        self.common_input = ReviewPageTextarea(ReviewPageLocators.COMMON_INPUT, ReviewPageLocators.COMMON_INPUT_WRAP, self)
         self.invalid_list = BaseElement(ReviewPageLocators.INVALID_LIST, self)
 
     def wait_for_average(self, average, timeout):
-        WebDriverWait(self.driver, timeout).until(lambda d : self.average_stars.get_value() == str(average))
+        WebDriverWait(self.driver, timeout).until(lambda d: self.average_stars.get_value() == str(average))
 
     def rate_stars(self, row, x):
-        self.driver.find_elements_by_class_name('rate__line__mark_'+str(x))[row].click()
+        self.driver.find_elements_by_class_name('rate__line__mark_' + str(x))[row].click()
 
 
 class ReviewPageTextarea(InputElement):

@@ -26,4 +26,3 @@ class InputElement(BaseElement):
 class ClickableElement(BaseElement):
     def click(self):
         self._get_element().click()
-

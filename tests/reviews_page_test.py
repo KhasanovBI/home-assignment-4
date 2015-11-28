@@ -26,10 +26,8 @@ class AddReviewButtonCheck(unittest.TestCase):
     def test_not_logged_add_review_button_click(self):
         add_review_button = self.reviews_page.add_review_button
         add_review_button.click()
-        login_form = self.reviews_page.login_form
-        login_form.wait_popup()
-        login_form.set_login(TEST_USER_LOGIN)
-        login_form.set_password(TEST_USER_PASSWORD)
-        login_form.submit()
+        self.reviews_page.username_field.set_value(TEST_USER_LOGIN)
+        self.reviews_page.password_field.set_value(TEST_USER_PASSWORD)
+        self.reviews_page.username_field.submit()
         self.reviews_page.wait_another_page_loading()
         self.assertEquals(urlparse(self.reviews_page.get_current_url()).netloc, 'e.mail.ru')

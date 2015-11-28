@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import unittest
 import os
+import unittest
 
 from selenium import webdriver
 
@@ -23,16 +23,12 @@ class ReviewPageTest(unittest.TestCase):
         self.page = ReviewPage(self.driver)
         self.page.open()
 
-
     def tearDown(self):
-
-
         self.driver.quit()
 
-
     def testStars(self):
-        #self.page.marka_box.click()
-        #self.page.BMW_list_item.click()
+        # self.page.marka_box.click()
+        # self.page.BMW_list_item.click()
         self.page.rate_stars(1, 1)
         self.page.rate_stars(2, 2)
         self.page.rate_stars(3, 3)
@@ -54,4 +50,3 @@ class ReviewPageTest(unittest.TestCase):
         self.assertFalse(self.page.problems_input.is_invalid())
         self.assertTrue(self.page.invalid_list.get_value().find(u'достоинства') != -1)
         self.assertTrue(self.page.invalid_list.get_value().find(u'общее впечатление') != -1)
-

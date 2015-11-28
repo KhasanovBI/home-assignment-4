@@ -1,9 +1,11 @@
 import urlparse
 
 from selenium.webdriver.support.expected_conditions import staleness_of
-from selenium.webdriver.support.wait import WebDriverWait
+
+from auth_settings import TEST_USER_LOGIN, TEST_USER_PASSWORD
 from element import *
 from locators import MainPageLocators
+
 
 class Page(object):
     BASE_URL = 'https://cars.mail.ru'
@@ -31,8 +33,8 @@ class Page(object):
 
     def login(self):
         self.login_button.click()
-        self.username_field.set_value("testcarspetr")
-        self.password_field.set_value("seleniumcars")
+        self.username_field.set_value(TEST_USER_LOGIN)
+        self.password_field.set_value(TEST_USER_PASSWORD)
         self.username_field.submit()
 
 
