@@ -10,8 +10,8 @@ class BaseElement(object):
         return self._get_element().text
 
     def _get_element(self):
-        WebDriverWait(self.driver, 5).until(lambda d: self.locator.locate(d))
-        WebDriverWait(self.driver, 5).until(lambda d: self.locator.locate(d).is_displayed())
+        WebDriverWait(self.driver, 10).until(lambda d: self.locator.locate(d))
+        WebDriverWait(self.driver, 10).until(lambda d: self.locator.locate(d).is_displayed())
         return self.locator.locate(self.driver)
 
 

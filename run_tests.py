@@ -14,7 +14,7 @@ if __name__ == '__main__':
         AddReviewButtonCheck,
         ReviewPageTest
     ]
-    test_classes_to_run = [ReviewPageTest]
+    # test_classes_to_run = [ReviewPageTest]
     loader = unittest.TestLoader()
 
     suites_list = []

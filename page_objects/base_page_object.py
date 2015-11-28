@@ -1,4 +1,5 @@
 import urlparse
+from contextlib import contextmanager
 
 from selenium.webdriver.support.expected_conditions import staleness_of
 
@@ -29,7 +30,7 @@ class Page(object):
 
     def wait_another_page_loading(self):
         old_page = self.driver.find_element_by_tag_name('html')
-        WebDriverWait(self.driver, 5).until(staleness_of(old_page))
+        WebDriverWait(self.driver, 30).until(staleness_of(old_page))
 
     def login(self):
         self.login_button.click()
