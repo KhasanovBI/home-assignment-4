@@ -36,8 +36,8 @@ class BuyPageLocators:
 class ReviewPageLocators:
     AVERAGE_STARS = DriverLocator((By.CLASS_NAME, 'js-average_score_val'))
     BMW_LIST_ITEM = DriverLocator((By.XPATH, '//div[contains(@class, "js-select__options__item") and text()="BMW"]'))
-    MARKA_BOX = DriverLocator((By.XPATH, '//div[@data-title="Марка"]'))
-    PROBEG_INPUT = DriverLocator((By.XPATH, '//input[@placeholder="Пробег"][2]'))
+    MARK_BOX = DriverLocator((By.XPATH, '//div[@data-title="Марка"]'))
+    MILEAGE_INPUT = DriverLocator((By.XPATH, '//input[@placeholder="Пробег"][2]'))
     ADVANT_INPUT_WRAP = DriverLocator((By.XPATH, '//div[@data-title="Достоинства"]'))
     ADVANT_INPUT = DriverLocator((By.XPATH, '//textarea[@name="advantages_text"]'))
     PROBLEMS_INPUT_WRAP = DriverLocator((By.XPATH, '//div[@data-title="Недостатки"]'))
@@ -54,4 +54,4 @@ class StarLocator(BaseLocator):
         self.star_id = star_id
 
     def locate(self, driver):
-        return driver.find_elements_by_class_name('rate__line__mark_' + str(self.star_id))[self.line_id]
+        return driver.find_elements_by_class_name('rate__line__mark_%d' % self.star_id)[self.line_id]

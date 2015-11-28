@@ -13,7 +13,6 @@ class BuyPage(Page):
     for (var i = 0; i < titles.length; ++i) {
         t[i] = {"price": prices[i].textContent, "title": titles[i].textContent,
             "region": regions[i].textContent};
-
     }
     return t;"""
 

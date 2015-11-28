@@ -1,5 +1,4 @@
 import urlparse
-from contextlib import contextmanager
 
 from selenium.webdriver.support.expected_conditions import staleness_of
 
