@@ -8,7 +8,7 @@ from selenium.webdriver import DesiredCapabilities, Remote
 from page_objects.review_page_object import *
 
 
-class StarsCalulationTest(unittest.TestCase):
+class StarsCalculationTest(unittest.TestCase):
     def setUp(self):
         browser = os.environ.get('TTHA2BROWSER', 'CHROME')
 
@@ -21,6 +21,9 @@ class StarsCalulationTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
+
+    def test_none_of_stars(self):
+        self.assertTrue(self.page.average_stars.get_value(), '0')
 
     def test_min_of_stars(self):
         self.page.rate_stars(0, 1)
@@ -42,7 +45,17 @@ class StarsCalulationTest(unittest.TestCase):
         self.page.wait_for_average(5, 1)
         self.assertTrue(self.page.average_stars.get_value() == '5')
 
-    def test_round_average_of_stars(self):
+    def test_float_average_of_stars(self):
+        self.page.rate_stars(0, 4)
+        self.page.rate_stars(1, 4)
+        self.page.rate_stars(2, 4)
+        self.page.rate_stars(3, 5)
+        self.page.rate_stars(4, 5)
+        self.page.rate_stars(5, 5)
+        self.page.wait_for_average(4.5, 1)
+        self.assertTrue(self.page.average_stars.get_value() == '4.5')
+
+    def test_round_float_average_of_stars(self):
         self.page.rate_stars(0, 3)
         self.page.rate_stars(1, 4)
         self.page.rate_stars(2, 5)
