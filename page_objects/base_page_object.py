@@ -2,7 +2,8 @@ import urlparse
 
 from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.webdriver.support.wait import WebDriverWait
-
+from element import *
+from locators import MainPageLocators
 
 class Page(object):
     BASE_URL = 'https://cars.mail.ru'
@@ -10,6 +11,11 @@ class Page(object):
 
     def __init__(self, driver):
         self.driver = driver
+        self.username_field = InputElement(MainPageLocators.USERNAME_FIELD, self)
+        self.password_field = InputElement(MainPageLocators.PASSWORD_FIELD, self)
+        self.login_button = ClickableElement(MainPageLocators.LOGIN_BUTTON, self)
+        self.email_field = ClickableElement(MainPageLocators.USER_EMAIL_HREF, self)
+        self.logout_button = ClickableElement(MainPageLocators.LOGOUT_BUTTON, self)
 
     def open(self):
         url = urlparse.urljoin(self.BASE_URL, self.PATH)
@@ -22,6 +28,12 @@ class Page(object):
     def wait_another_page_loading(self):
         old_page = self.driver.find_element_by_tag_name('html')
         WebDriverWait(self.driver, 5).until(staleness_of(old_page))
+
+    def login(self):
+        self.login_button.click()
+        self.username_field.set_value("testcarspetr")
+        self.password_field.set_value("seleniumcars")
+        self.username_field.submit()
 
 
 class Component(object):
