@@ -4,7 +4,7 @@ import os
 import unittest
 
 from selenium.webdriver import DesiredCapabilities, Remote
-
+from selenium.webdriver import Firefox
 from page_objects.review_page_object import *
 
 
@@ -16,6 +16,7 @@ class StarsCalculationTest(unittest.TestCase):
             command_executor='http://127.0.0.1:4444/wd/hub',
             desired_capabilities=getattr(DesiredCapabilities, browser).copy()
         )
+
         self.page = ReviewPage(self.driver)
         self.page.open()
 
@@ -87,12 +88,12 @@ class ReviewPageTest(unittest.TestCase):
         self.driver.quit()
 
     def test_mileage_input(self):
-        self.page.probeg_input.set_value("-123a4#8")
+        self.page.probeg_input.send_keys("-123a4#8")
         self.assertEquals(self.page.probeg_input.get_value(), "12 348")
 
     def test_invalid_text_fields(self):
         self.page.login()
-        self.page.problems_input.set_value("lalala")
+        self.page.problems_input.send_keys("lalala")
         self.page.submit_btn.click()
         self.assertTrue(self.page.common_input.is_invalid())
         self.assertTrue(self.page.advant_input.is_invalid())
@@ -102,4 +103,14 @@ class ReviewPageTest(unittest.TestCase):
 
     def test_min_total_symbols_count_in_text_area_fields(self):
         self.page.login()
-        pass
+        self.page.fill_car_fields()
+        self.page.rate_all_stars(5)
+        self.page.common_input.send_keys("q"*100)
+        self.page.problems_input.send_keys("q"*50)
+        self.page.advant_input.send_keys("q"*49)
+        self.page.submit_btn.click()
+        self.assertTrue(self.page.invalid_form_msg.get_value().find(u'не менее 200 знаков') != -1)
+        self.page.advant_input.send_keys("q")
+        self.page.submit_btn.click()
+        self.assertTrue(self.page.success_msg.is_present())
+

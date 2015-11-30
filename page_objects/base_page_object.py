@@ -33,8 +33,8 @@ class Page(object):
 
     def login(self):
         self.login_button.click()
-        self.username_field.set_value(TEST_USER_LOGIN)
-        self.password_field.set_value(TEST_USER_PASSWORD)
+        self.username_field.send_keys(TEST_USER_LOGIN)
+        self.password_field.send_keys(TEST_USER_PASSWORD)
         self.username_field.submit()
 
 

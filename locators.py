@@ -36,7 +36,13 @@ class BuyPageLocators:
 class ReviewPageLocators:
     AVERAGE_STARS = DriverLocator((By.CLASS_NAME, 'js-average_score_val'))
     BMW_LIST_ITEM = DriverLocator((By.XPATH, '//div[contains(@class, "js-select__options__item") and text()="BMW"]'))
+    BMW_MODEL_ITEM = DriverLocator((By.XPATH, '//div[contains(@class, "js-select__options__item") and text()="1"]'))
+    BMW_YEAR_ITEM = DriverLocator((By.XPATH, '//div[contains(@class, "js-select__options__item") and text()="2015"]'))
+    BMW_MOD_ITEM = DriverLocator((By.XPATH, '//div[contains(@class, "js-select__options__item") and text()="1.5D AT"]'))
     MARK_BOX = DriverLocator((By.XPATH, '//div[@data-title="Марка"]'))
+    MODEL_BOX = DriverLocator((By.XPATH, '//div[@data-title="Модель"]'))
+    YEAR_BOX = DriverLocator((By.XPATH, '//div[@data-title="Год производства"]'))
+    MOD_BOX = DriverLocator((By.XPATH, '//div[@data-title="Модификация"]'))
     MILEAGE_INPUT = DriverLocator((By.XPATH, '//input[@placeholder="Пробег"][2]'))
     ADVANT_INPUT_WRAP = DriverLocator((By.XPATH, '//div[@data-title="Достоинства"]'))
     ADVANT_INPUT = DriverLocator((By.XPATH, '//textarea[@name="advantages_text"]'))
@@ -46,6 +52,8 @@ class ReviewPageLocators:
     COMMON_INPUT = DriverLocator((By.XPATH, '//textarea[@name="common_text"]'))
     SUBMIT_BTN = DriverLocator((By.XPATH, '//div[@class="car__submit"]//button[@type="submit"]'))
     INVALID_LIST = DriverLocator((By.CLASS_NAME, 'car-add__error__validate'))
+    INVALID_FORM_MSG = DriverLocator((By.CLASS_NAME, 'car-add__error__form'))
+    SUCCESS_MSG = DriverLocator((By.XPATH, '//[text()="ОТЗЫВ УСПЕШНО ДОБАВЛЕН"]'))
 
 
 class StarLocator(BaseLocator):

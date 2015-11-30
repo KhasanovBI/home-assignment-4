@@ -33,7 +33,7 @@ class BuyPageTest(unittest.TestCase):
     def test_region(self):
         page = BuyPage(self.driver)
         page.region_btn.click()
-        page.region_input.set_value(u'Казань')
+        page.region_input.send_keys(u'Казань')
         page.city_first_result.click()
         page.submit_region_btn.click()
         page.apply_filter_lnk.click()

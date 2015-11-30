@@ -15,7 +15,7 @@ if __name__ == '__main__':
         StarsCalculationTest,
         ReviewPageTest
     ]
-    # test_classes_to_run = [StarsCalculationTest]
+    # test_classes_to_run = [ReviewPageTest]
     loader = unittest.TestLoader()
 
     suites_list = []
