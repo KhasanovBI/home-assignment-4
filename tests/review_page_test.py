@@ -114,35 +114,47 @@ class ReviewPageTest(unittest.TestCase):
         self.page.submit_btn.click()
         self.assertTrue(self.page.success_msg.is_present())
 
-    def test_mark_enables_model(self):
+    def test_model_disabled_before_mark_chosen(self):
         self.assertTrue(self.page.model_box.enabled_is(False))
+
+    def test_mark_enables_model(self):
         self.page.marka_box.select_option()
         self.assertTrue(self.page.model_box.enabled_is(True))
 
-    def test_model_enables_year(self):
+    def test_year_disabled_before_model_chosen(self):
         self.page.marka_box.select_option()
         self.assertTrue(self.page.year_box.enabled_is(False))
+
+    def test_model_enables_year(self):
+        self.page.marka_box.select_option()
         self.page.model_box.select_option()
         self.assertTrue(self.page.model_box.enabled_is(True))
+
+    def test_mod_disabled_before_year_chosen(self):
+        self.page.marka_box.select_option()
+        self.page.model_box.select_option()
+        self.assertTrue(self.page.mod_box.enabled_is(False))
 
     def test_year_enables_mod(self):
         self.page.marka_box.select_option()
         self.page.model_box.select_option()
-        self.assertTrue(self.page.mod_box.enabled_is(False))
         self.page.year_box.select_option()
         self.assertTrue(self.page.mod_box.enabled_is(True))
+
+    def test_remaining_boxes_disabled_before_mod_chosen(self):
+        self.page.marka_box.select_option()
+        self.page.model_box.select_option()
+        self.page.year_box.select_option()
+        self.assertTrue(self.page.body_box.enabled_is(False))
+        self.assertTrue(self.page.kpp_box.enabled_is(False))
+        self.assertTrue(self.page.gas_volume_box.enabled_is(False))
+        self.assertTrue(self.page.privod_box.enabled_is(False))
 
     def test_mod_field_fills_rest(self):
         self.page.login()
         self.page.marka_box.select_option()
         self.page.model_box.select_option()
         self.page.year_box.select_option()
-        self.page.submit_btn.click()
-        invalid_msg = self.page.invalid_list.get_value()
-        self.assertTrue(invalid_msg.find(u'кузов') != -1)
-        self.assertTrue(invalid_msg.find(u'объем двигателя') != -1)
-        self.assertTrue(invalid_msg.find(u'кпп') != -1)
-        self.assertTrue(invalid_msg.find(u'привод') != -1)
         self.page.mod_box.select_option()
         self.page.submit_btn.click()
         invalid_msg = self.page.invalid_list.get_value()

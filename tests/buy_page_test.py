@@ -25,8 +25,8 @@ class BuyPageTest(unittest.TestCase):
         page = BuyPage(self.driver)
         page.price_sort_btn.click()
 
-        cards = page.cards
-        prices = [x.price.get_value() for x in cards]
+        cards = page.read_cards()
+        prices = [x.price for x in cards]
         for i in range(0, len(prices) - 1):
             self.assertTrue(prices[i] <= prices[i + 1])
 

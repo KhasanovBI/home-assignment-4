@@ -13,7 +13,7 @@ if __name__ == '__main__':
         ReviewPageTest,
         StarsCalculationTest,
     ]
-    # test_classes_to_run = [ReviewPageTest]
+    test_classes_to_run = [BuyPageTest]
     loader = unittest.TestLoader()
 
     suites_list = []

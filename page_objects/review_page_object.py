@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from element import *
 from locators import ReviewPageLocators
 from page_objects.base_page_object import Page
@@ -10,7 +11,6 @@ class ReviewPage(Page):
     def __init__(self, driver):
         super(ReviewPage, self).__init__(driver)
         self.average_stars = BaseElement(ReviewPageLocators.AVERAGE_STARS, self)
-        self.BMW_list_item = ClickableElement(ReviewPageLocators.BMW_LIST_ITEM, self)
 
         self.probeg_input = MileageInput(ReviewPageLocators.MILEAGE_INPUT, self)
         self.problems_input = ReviewPageTextarea(ReviewPageLocators.PROBLEMS_INPUT, ReviewPageLocators.PROBLEMS_INPUT_WRAP, self)
@@ -18,11 +18,14 @@ class ReviewPage(Page):
         self.advant_input = ReviewPageTextarea(ReviewPageLocators.ADVANT_INPUT, ReviewPageLocators.ADVANT_INPUT_WRAP, self)
         self.common_input = ReviewPageTextarea(ReviewPageLocators.COMMON_INPUT, ReviewPageLocators.COMMON_INPUT_WRAP, self)
         self.invalid_list = BaseElement(ReviewPageLocators.INVALID_LIST, self)
-        self.marka_box = ComboboxElement(ReviewPageLocators.MARK_BOX, ReviewPageLocators.BMW_LIST_ITEM, self)
-        self.model_box = ComboboxElement(ReviewPageLocators.MODEL_BOX, ReviewPageLocators.BMW_MODEL_ITEM, self)
-        self.year_box = ComboboxElement(ReviewPageLocators.YEAR_BOX, ReviewPageLocators.BMW_YEAR_ITEM, self)
-        self.mod_box = ComboboxElement(ReviewPageLocators.MOD_BOX, ReviewPageLocators.BMW_MOD_ITEM, self)
-
+        self.marka_box = ComboboxElement(ReviewPageLocators.MARK_BOX, self)
+        self.model_box = ComboboxElement(ReviewPageLocators.MODEL_BOX, self)
+        self.year_box = ComboboxElement(ReviewPageLocators.YEAR_BOX, self)
+        self.mod_box = ComboboxElement(ReviewPageLocators.MOD_BOX, self)
+        self.body_box = ComboboxElement(ReviewPageLocators.BODY_BOX, self)
+        self.kpp_box = ComboboxElement(ReviewPageLocators.KPP_BOX, self)
+        self.privod_box = ComboboxElement(ReviewPageLocators.PRIVOD_BOX, self)
+        self.gas_volume_box = ComboboxElement(ReviewPageLocators.GAS_VOLUME_BOX, self)
         self.invalid_form_msg = BaseElement(ReviewPageLocators.INVALID_FORM_MSG, self)
         self.success_msg = BaseElement(ReviewPageLocators.SUCCESS_MSG, self)
 
@@ -49,21 +52,12 @@ class ReviewPage(Page):
 
 
 class ComboboxElement(ClickableElement):
-    def __init__(self, locator, option_locator, page):
-        super(ComboboxElement, self).__init__(locator, page)
-        self.option = ClickableElement(option_locator, page)
-
     def select_option(self):
         self.click()
-        self.option.click()
-
-    def e(self, inner_div, expected):
-        inner_div = self._get_element().find_element_by_xpath('.//*[contains(@class,"input__box_select")]')
-        clas = inner_div.get_attribute('class').find('input__box_disabled')
-        print inner_div.get_attribute('innerHTML')
-
-        return (clas != -1) == expected
-
+        WebDriverWait(self.driver, 5).until(
+            lambda d: EC.visibility_of(self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]'))
+        )
+        self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]').click()
 
     def enabled_is(self, expected):
         inner_div = self._get_element().find_element_by_xpath('.//*[contains(@class,"input__box_select")]')
