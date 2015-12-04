@@ -24,15 +24,20 @@ class BuyPage(Page):
         self.city_first_result = ClickableElement(BuyPageLocators.CITY_ITEM, self)
         self.apply_filter_lnk = ClickableElement(BuyPageLocators.APPLY_FILTER, self)
         self.submit_region_btn = ClickableElement(BuyPageLocators.SUBMIT_REGION, self)
+        self.init_cards()
 
-    def read_cards(self):
-        js_result = self.driver.execute_script(self.JS_CARDS_SCRIPT)
-        cards = [OfferCard(int(x['price']), x['title'], x['region']) for x in js_result]
-        return cards
+
+    def init_cards(self):
+        n_cards = len(BuyPageLocators.OFFER_CARDS.locate(self.driver))
+        self.cards = [OfferCard(BuyPageLocators.OfferCardLocator(i), self) for i in range(0, n_cards)]
+        # js_result = self.driver.execute_script(self.JS_CARDS_SCRIPT)
+        # cards = [OfferCard(int(x['price']), x['title'], x['region']) for x in js_result]
+        # return cards
+
 
 
 class OfferCard():
-    def __init__(self, price, title, region):
-        self.price = price
-        self.title = title
-        self.region = region
+    def __init__(self, locator, page):
+        self.price = BaseElement(BuyPageLocators.OfferCardPriceLocator(locator), page)
+        # self.title = title
+        # self.region = region
