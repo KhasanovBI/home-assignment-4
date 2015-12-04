@@ -114,22 +114,36 @@ class ReviewPageTest(unittest.TestCase):
         self.page.submit_btn.click()
         self.assertTrue(self.page.success_msg.is_present())
 
+    def test_mark_enables_model(self):
+        self.assertTrue(self.page.model_box.enabled_is(False))
+        self.page.marka_box.select_option()
+        self.assertTrue(self.page.model_box.enabled_is(True))
+
+    def test_model_enables_year(self):
+        self.page.marka_box.select_option()
+        self.assertTrue(self.page.year_box.enabled_is(False))
+        self.page.model_box.select_option()
+        self.assertTrue(self.page.model_box.enabled_is(True))
+
+    def test_year_enables_mod(self):
+        self.page.marka_box.select_option()
+        self.page.model_box.select_option()
+        self.assertTrue(self.page.mod_box.enabled_is(False))
+        self.page.year_box.select_option()
+        self.assertTrue(self.page.mod_box.enabled_is(True))
+
     def test_mod_field_fills_rest(self):
         self.page.login()
-        self.page.marka_box.click()
-        self.page.BMW_list_item.click()
-        self.page.model_box.click()
-        self.page.BMW_model_list_item.click()
-        self.page.year_box.click()
-        self.page.BMW_year_list_item.click()
+        self.page.marka_box.select_option()
+        self.page.model_box.select_option()
+        self.page.year_box.select_option()
         self.page.submit_btn.click()
         invalid_msg = self.page.invalid_list.get_value()
         self.assertTrue(invalid_msg.find(u'кузов') != -1)
         self.assertTrue(invalid_msg.find(u'объем двигателя') != -1)
         self.assertTrue(invalid_msg.find(u'кпп') != -1)
         self.assertTrue(invalid_msg.find(u'привод') != -1)
-        self.page.mod_box.click()
-        self.page.BMW_mod_list_item.click()
+        self.page.mod_box.select_option()
         self.page.submit_btn.click()
         invalid_msg = self.page.invalid_list.get_value()
         self.assertTrue(invalid_msg.find(u'кузов') == -1)

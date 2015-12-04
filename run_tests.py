@@ -8,12 +8,10 @@ from tests.review_page_test import ReviewPageTest, StarsCalculationTest
 
 if __name__ == '__main__':
     test_classes_to_run = [
-        BuyPageTest,
         AlphabeticalCatalogCheck,
         AddReviewButtonCheck,
         ReviewPageTest,
         StarsCalculationTest,
-        ReviewPageTest
     ]
     # test_classes_to_run = [ReviewPageTest]
     loader = unittest.TestLoader()

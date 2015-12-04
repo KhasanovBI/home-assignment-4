@@ -15,6 +15,11 @@ class DriverLocator(BaseLocator):
         return driver.find_element(*self.locator)
 
 
+class DriverLocatorMany(DriverLocator):
+    def locate(self, driver):
+        return driver.find_elements(*self.locator)
+
+
 class MainPageLocators:
     USERNAME_FIELD = DriverLocator((By.ID, 'ph_login'))
     PASSWORD_FIELD = DriverLocator((By.ID, 'ph_password'))
@@ -31,6 +36,22 @@ class BuyPageLocators:
         (By.XPATH, '//div[contains(@class, "input__data__value") and contains(@class, "js-field_item")]'))
     APPLY_FILTER = DriverLocator((By.CLASS_NAME, 'tooltip__go__link'))
     SUBMIT_REGION = DriverLocator((By.CLASS_NAME, 'js-control_submit'))
+    OFFER_CARDS = DriverLocatorMany((By.XPATH, '//div[contains(@class, "offer-card js-offer")]'))
+
+    class OfferCardPriceLocator(BaseLocator):
+        def __init__(self, card_locator):
+            self.card_locator = card_locator
+
+        def locate(self, driver):
+            return self.card_locator.locate(driver).find_element_by_class_name('offer-card__price__value')
+
+    class OfferCardLocator(BaseLocator):
+        def __init__(self, id):
+            self.id = id
+
+        def locate(self, driver):
+            return driver.find_element_by_xpath(
+                "(//div[@class='offer-card offer-card_fst js-offer' or @class='offer-card js-offer'])[%d]" % (self.id + 1,))
 
 
 class ReviewPageLocators:
