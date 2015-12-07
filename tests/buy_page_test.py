@@ -3,7 +3,8 @@
 import os
 import unittest
 
-from selenium.webdriver import DesiredCapabilities, Remote, Firefox
+from selenium.webdriver import DesiredCapabilities, Remote, Firefox, Chrome
+from selenium.webdriver.chrome import webdriver
 
 from page_objects.buy_page_object import BuyPage
 
@@ -16,6 +17,7 @@ class BuyPageTest(unittest.TestCase):
             command_executor='http://127.0.0.1:4444/wd/hub',
             desired_capabilities=getattr(DesiredCapabilities, browser).copy()
         )
+
         self.driver.get("https://cars.mail.ru/sale/msk/all/")
 
     def tearDown(self):

@@ -135,16 +135,19 @@ class ReviewPageTest(unittest.TestCase):
         self.page.model_box.select_option()
         self.assertTrue(self.page.mod_box.enabled_is(False))
 
-    def test_year_enables_mod(self):
+    def test_year_enables_rest(self):
         self.page.marka_box.select_option()
         self.page.model_box.select_option()
         self.page.year_box.select_option()
         self.assertTrue(self.page.mod_box.enabled_is(True))
+        self.assertTrue(self.page.body_box.enabled_is(True))
+        self.assertTrue(self.page.kpp_box.enabled_is(True))
+        self.assertTrue(self.page.gas_volume_box.enabled_is(True))
+        self.assertTrue(self.page.privod_box.enabled_is(True))
 
-    def test_remaining_boxes_disabled_before_mod_chosen(self):
+    def test_remaining_boxes_disabled_before_model_chosen(self):
         self.page.marka_box.select_option()
         self.page.model_box.select_option()
-        self.page.year_box.select_option()
         self.assertTrue(self.page.body_box.enabled_is(False))
         self.assertTrue(self.page.kpp_box.enabled_is(False))
         self.assertTrue(self.page.gas_volume_box.enabled_is(False))

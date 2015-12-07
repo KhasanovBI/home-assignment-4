@@ -7,13 +7,16 @@ from tests.reviews_page_test import AddReviewButtonCheck
 from tests.review_page_test import ReviewPageTest, StarsCalculationTest
 
 if __name__ == '__main__':
+    import os
+    os.environ.setdefault('TTHA2BROWSER', 'CHROME')
     test_classes_to_run = [
         AlphabeticalCatalogCheck,
         AddReviewButtonCheck,
         ReviewPageTest,
         StarsCalculationTest,
+        BuyPageTest
     ]
-    test_classes_to_run = [BuyPageTest]
+    # test_classes_to_run = [BuyPageTest]
     loader = unittest.TestLoader()
 
     suites_list = []

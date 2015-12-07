@@ -78,7 +78,7 @@ class ReviewPageLocators:
     SUBMIT_BTN = DriverLocator((By.XPATH, '//div[@class="car__submit"]//button[@type="submit"]'))
     INVALID_LIST = DriverLocator((By.CLASS_NAME, 'car-add__error__validate'))
     INVALID_FORM_MSG = DriverLocator((By.CLASS_NAME, 'car-add__error__form'))
-    SUCCESS_MSG = DriverLocator((By.XPATH, '//[text()="ОТЗЫВ УСПЕШНО ДОБАВЛЕН"]'))
+    SUCCESS_MSG = DriverLocator((By.CLASS_NAME, 'car-add__done'))
 
 
 class StarLocator(BaseLocator):

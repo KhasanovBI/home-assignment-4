@@ -1,4 +1,4 @@
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 
 
@@ -10,9 +10,16 @@ class BaseElement(object):
     def get_value(self):
         return self._get_element().text
 
+    def wait_displayed(self, d):
+        try:
+            return self.locator.locate(d).is_displayed()
+        except StaleElementReferenceException:
+            return False
+
+
     def _get_element(self):
         WebDriverWait(self.driver, 10).until(lambda d: self.locator.locate(d))
-        WebDriverWait(self.driver, 10).until(lambda d: self.locator.locate(d).is_displayed())
+        WebDriverWait(self.driver, 10).until(lambda d: self.wait_displayed(d))
         return self.locator.locate(self.driver)
 
     def is_present(self):
