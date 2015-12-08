@@ -1,7 +1,5 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from element import *
-from locators import ReviewPageLocators, DriverLocator, BaseLocator
+from locators import ReviewPageLocators, BaseLocator
 from page_objects.base_page_object import Page
 
 
@@ -13,10 +11,13 @@ class ReviewPage(Page):
         self.average_stars = BaseElement(ReviewPageLocators.AVERAGE_STARS, self)
 
         self.probeg_input = MileageInput(ReviewPageLocators.MILEAGE_INPUT, self)
-        self.problems_input = ReviewPageTextarea(ReviewPageLocators.PROBLEMS_INPUT, ReviewPageLocators.PROBLEMS_INPUT_WRAP, self)
+        self.problems_input = ReviewPageTextarea(ReviewPageLocators.PROBLEMS_INPUT,
+                                                 ReviewPageLocators.PROBLEMS_INPUT_WRAP, self)
         self.submit_btn = ClickableElement(ReviewPageLocators.SUBMIT_BTN, self)
-        self.advant_input = ReviewPageTextarea(ReviewPageLocators.ADVANT_INPUT, ReviewPageLocators.ADVANT_INPUT_WRAP, self)
-        self.common_input = ReviewPageTextarea(ReviewPageLocators.COMMON_INPUT, ReviewPageLocators.COMMON_INPUT_WRAP, self)
+        self.advant_input = ReviewPageTextarea(ReviewPageLocators.ADVANT_INPUT, ReviewPageLocators.ADVANT_INPUT_WRAP,
+                                               self)
+        self.common_input = ReviewPageTextarea(ReviewPageLocators.COMMON_INPUT, ReviewPageLocators.COMMON_INPUT_WRAP,
+                                               self)
         self.invalid_list = BaseElement(ReviewPageLocators.INVALID_LIST, self)
         self.marka_box = ComboboxElement(ReviewPageLocators.MARK_BOX, self)
         self.model_box = ComboboxElement(ReviewPageLocators.MODEL_BOX, self)
@@ -68,14 +69,8 @@ class ComboboxElement(ClickableElement):
         return self.option.locator.locate(d)
 
     def select_option(self):
-
         WebDriverWait(self.driver, 5).until(lambda d: self.expand_list(d))
         self.option.click()
-
-        # WebDriverWait(self.driver, 5).until(
-        #     lambda d: EC.visibility_of(self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]'))
-        # )
-        # self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]').click()
 
     def enabled_is(self, expected):
         inner_div = self._get_element().find_element_by_xpath('.//*[contains(@class,"input__box_select")]')

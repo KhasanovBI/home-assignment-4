@@ -3,12 +3,10 @@ import unittest
 
 from tests.buy_page_test import BuyPageTest
 from tests.catalog_page_test import AlphabeticalCatalogCheck
-from tests.reviews_page_test import AddReviewButtonCheck
 from tests.review_page_test import ReviewPageTest, StarsCalculationTest
+from tests.reviews_page_test import AddReviewButtonCheck
 
 if __name__ == '__main__':
-    # import os
-    # os.environ.setdefault('TTHA2BROWSER', 'FIREFOX')
     test_classes_to_run = [
         AlphabeticalCatalogCheck,
         AddReviewButtonCheck,
@@ -16,7 +14,6 @@ if __name__ == '__main__':
         StarsCalculationTest,
         BuyPageTest
     ]
-    test_classes_to_run = [ReviewPageTest]
     loader = unittest.TestLoader()
 
     suites_list = []

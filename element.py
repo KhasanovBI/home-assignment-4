@@ -16,7 +16,6 @@ class BaseElement(object):
         except StaleElementReferenceException:
             return False
 
-
     def _get_element(self):
         WebDriverWait(self.driver, 10).until(lambda d: self.locator.locate(d))
         WebDriverWait(self.driver, 10).until(lambda d: self.wait_displayed(d))
@@ -41,7 +40,6 @@ class InputElement(BaseElement):
     def submit(self):
         self._get_element().submit()
 
-import selenium.webdriver.support.expected_conditions as EC
 
 class ClickableElement(BaseElement):
     def _wait_clickable(self, d):

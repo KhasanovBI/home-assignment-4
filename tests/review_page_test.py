@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-
 import os
 import unittest
 
 from selenium.webdriver import DesiredCapabilities, Remote
-from selenium.webdriver import Firefox
+
 from page_objects.review_page_object import *
 
 
@@ -105,9 +104,9 @@ class ReviewPageTest(unittest.TestCase):
         self.page.login()
         self.page.fill_car_fields()
         self.page.rate_all_stars(5)
-        self.page.common_input.send_keys("q"*100)
-        self.page.problems_input.send_keys("q"*50)
-        self.page.advant_input.send_keys("q"*49)
+        self.page.common_input.send_keys("q" * 100)
+        self.page.problems_input.send_keys("q" * 50)
+        self.page.advant_input.send_keys("q" * 49)
         self.page.submit_btn.click()
         self.assertTrue(self.page.invalid_form_msg.get_value().find(u'не менее 200 знаков') != -1)
         self.page.advant_input.send_keys("q")
@@ -165,4 +164,3 @@ class ReviewPageTest(unittest.TestCase):
         self.assertTrue(invalid_msg.find(u'объем двигателя') == -1)
         self.assertTrue(invalid_msg.find(u'кпп') == -1)
         self.assertTrue(invalid_msg.find(u'привод') == -1)
-

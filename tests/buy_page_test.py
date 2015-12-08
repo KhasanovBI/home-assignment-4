@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
 import os
 import unittest
 
-from selenium.webdriver import DesiredCapabilities, Remote, Firefox, Chrome
-from selenium.webdriver.chrome import webdriver
+from selenium.webdriver import DesiredCapabilities, Remote
 
 from page_objects.buy_page_object import BuyPage
 
