@@ -63,8 +63,13 @@ class ComboboxElement(ClickableElement):
         super(ComboboxElement, self).__init__(locator, page)
         self.option = ClickableElement(self.OptionLocator(self), page)
 
-    def select_option(self):
+    def expand_list(self, d):
         self.click()
+        return self.option.locator.locate(d)
+
+    def select_option(self):
+
+        WebDriverWait(self.driver, 5).until(lambda d: self.expand_list(d))
         self.option.click()
 
         # WebDriverWait(self.driver, 5).until(
