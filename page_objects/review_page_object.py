@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from element import *
-from locators import ReviewPageLocators
+from locators import ReviewPageLocators, DriverLocator, BaseLocator
 from page_objects.base_page_object import Page
 
 
@@ -52,12 +52,25 @@ class ReviewPage(Page):
 
 
 class ComboboxElement(ClickableElement):
+    class OptionLocator(BaseLocator):
+        def __init__(self, box):
+            self.box = box
+
+        def locate(self, driver):
+            return self.box._get_element().find_element_by_xpath('.//*[@data-optidx="1"]')
+
+    def __init__(self, locator, page):
+        super(ComboboxElement, self).__init__(locator, page)
+        self.option = ClickableElement(self.OptionLocator(self), page)
+
     def select_option(self):
         self.click()
-        WebDriverWait(self.driver, 5).until(
-            lambda d: EC.visibility_of(self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]'))
-        )
-        self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]').click()
+        self.option.click()
+
+        # WebDriverWait(self.driver, 5).until(
+        #     lambda d: EC.visibility_of(self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]'))
+        # )
+        # self._get_element().find_element_by_xpath('.//*[@data-optidx="1"]').click()
 
     def enabled_is(self, expected):
         inner_div = self._get_element().find_element_by_xpath('.//*[contains(@class,"input__box_select")]')
